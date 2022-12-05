@@ -19,11 +19,7 @@ Gabriel Ruiz.
 G Ruiz, OH Madrid-Padilla, Q Zhou. "Sequentially learning the topological ordering of directed acyclic graphs with likelihood ratio scores." *Transactions of Machine Learning Research*, 2022+. [\href{https://openreview.net/forum?id=4pCjIGIjrt}{Link}]  
 }
 \keyword{ package }
-\seealso{
-~~ Optional links to other man pages, e.g. ~~
-~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
-\code{\link[scorelingam:scorelingam]{scorelingam}}
-}
+
 \examples{
- See \href{https://github.com/gabriel-ruiz/scorelingam}{this Github repository} for examples.
+ See \href{https://github.com/gabriel-ruiz/scorelingam}{the Github repository} for examples.
 }
