@@ -3,33 +3,27 @@
 \alias{scorelingam}
 \docType{package}
 \title{
-\packageTitle{scorelingam}
+  ScoreLiNGAM
 }
 \description{
-\packageDescription{scorelingam}
+  Implements the sorting procedure outlined in \href{https://openreview.net/forum?id=4pCjIGIjrt}{Ruiz et. al (2022+)}. 
 }
 \details{
-
-The DESCRIPTION file:
-\packageDESCRIPTION{scorelingam}
-\packageIndices{scorelingam}
-~~ An overview of how to use the package, including the most important functions ~~
+  This section should provide a more detailed overview of how to use the
+  package, including the most important functions.
 }
 \author{
-\packageAuthor{scorelingam}
-
-Maintainer: \packageMaintainer{scorelingam}
+Gabriel Ruiz.
 }
 \references{
-~~ Literature or other references for background information ~~
+G Ruiz, OH Madrid-Padilla, Q Zhou. "Sequentially learning the topological ordering of directed acyclic graphs with likelihood ratio scores." *Transactions of Machine Learning Research*, 2022+. [\href{https://openreview.net/forum?id=4pCjIGIjrt}{Link}]  
 }
-~~ Optionally other standard keywords, one per line, from file KEYWORDS in the R ~~
-~~ documentation directory ~~
 \keyword{ package }
 \seealso{
 ~~ Optional links to other man pages, e.g. ~~
 ~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
+\code{\link[scorelingam:scorelingam]{scorelingam}}
 }
 \examples{
-~~ simple examples of the most important functions ~~
+ See \href{https://github.com/gabriel-ruiz/scorelingam}{this Github repository} for examples.
 }
