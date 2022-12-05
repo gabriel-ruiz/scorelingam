@@ -10,7 +10,7 @@
 #' @return A length p vector with the estimated permutation.
 #' @export
 scorelingam <- function(X, mb, numUpdates = 5L, family = "laplace", df = 10) {
-  sortllr( X, mb, numUpdates, family, df)
+  scorelingam_( X, mb, numUpdates, family, df)
 }
 
 #' Get weighted adjancency matrix for linear SEM.
@@ -21,7 +21,7 @@ scorelingam <- function(X, mb, numUpdates = 5L, family = "laplace", df = 10) {
 #' @return A p by p weighted adjacency matrix for the linear SEM. 
 #' @export
 getWeights <- function(X, pa) {
-  getWeights(X,pa) 
+  getWeights_(X,pa) 
 }
 
 #' Quickly estimate a Pearson correlation matrix using RcppArmadillo.
@@ -29,7 +29,7 @@ getWeights <- function(X, pa) {
 #' @return a p by p estimate of the correlation matrix.
 #' @export
 corrMat <- function(X) {
-  corrMat(X) 
+  corrMat_(X) 
 }
 
 

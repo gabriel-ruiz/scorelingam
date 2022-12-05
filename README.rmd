@@ -20,10 +20,10 @@ library(scorelingam)
 ## Generate data from a LiNGAM
 ### LiNGAM Parameters
 ```{r}
-p <- 5;numRoots <- 1; numParentsMin <- 1; numParentsMax <- 2
-scaleParam <- runif(n=p,min=0.5,max=1.2)
-causalOrder <- 5:1
-lingamParams <- randomWeightedAdjacencyMatrix(p=p,num.roots=numRoots,pa.min=numParentsMin,pa.max=numParentsMax,
+p = 5;numRoots = 1; numParentsMin = 1; numParentsMax = 2
+scaleParam = runif(n=p,min=0.5,max=1.2)
+causalOrder = 5:1
+lingamParams = randomWeightedAdjacencyMatrix(p=p,num.roots=numRoots,pa.min=numParentsMin,pa.max=numParentsMax,
                     pa.wt.min = 0.25,pa.wt.max = 0.9,prob.pos = 0.5,perm = causalOrder)
 # weighted adjacency matrix
 print(lingamParams$B)
@@ -31,8 +31,8 @@ print(lingamParams$B)
 ### Data matrix with $n=5000$
 When generating the data matrix, the possible options for the family argument are 'laplace', 'logistic', and 't', in which case the additional argument df is needed (df=10 is the default)
 ```{r}
-n <- 5000
-X <- generateData(B=lingamParams$B,scale = scaleParam,perm = causalOrder,n = n,family = 'laplace')
+n = 5000
+X = generateData(B=lingamParams$B,scale = scaleParam,perm = causalOrder,n = n,family = 'laplace')
 dim(X)
 ```
 
@@ -40,16 +40,17 @@ dim(X)
 When estimating a topological ordering for the LiNGAM, the possible options for the family argument are 'laplace', 'logistic', and 't', in which case the additional argument df is needed (df=10 is the default)
 ```{r order-step-small-graph}
 # neighborhoods specified to be all other nodes
-mbhat <- lapply(1:ncol(X),function(j){(1:ncol(X))[-j]}) 
-estOrder <- scorelingam(X=X,mb=mbhat,numUpdates=ncol(X),family='laplace')
+mbhat = lapply(1:ncol(X),function(j){(1:ncol(X))[-j]}) 
+estOrder = scorelingam(X=X,mb=mbhat,numUpdates=ncol(X),family='laplace')
 # check errors (ideally close to zero)
-checkSortingErrors(estOrder=estOrder,B=lingamParams$B)
+checkSortingErrors(estOrder=estOrder,A=lingamParams$B)
 ```
 
 ## Check accuracy of estimated weighted adjacency matrix
 
 ```{r}
-(Bhat <- getParams(X=X,mbhat=mbhat,ordering=estOrder)$Bhat)
+paHat = getParents(mb=mbhat,ordering=estOrder)
+(Bhat = getWeights(X=scale(X,scale=F,center=T),pa=paHat))
 # maximum entry-wise difference in absolute value
 norm(x=lingamParams$B-Bhat,type = 'i')
 ```
@@ -59,17 +60,17 @@ norm(x=lingamParams$B-Bhat,type = 'i')
 ## Generate data from a LiNGAM 
 ### LiNGAM Parameters
 ```{r,cache=T}
-p <- 10000;numRoots <- 100; numParentsMin <- 1; numParentsMax <- 2
-scaleParam <- runif(n=p,min=0.5,max=1.2)
-causalOrder <- c(seq(2,p,by=2),seq(1,p-1,by=2))
-lingamParams <- randomWeightedAdjacencyMatrix(p=p,num.roots=numRoots,pa.min=numParentsMin,pa.max=numParentsMax,
+p = 10000;numRoots = 100; numParentsMin = 1; numParentsMax = 2
+scaleParam = runif(n=p,min=0.5,max=1.2)
+causalOrder = c(seq(2,p,by=2),seq(1,p-1,by=2))
+lingamParams = randomWeightedAdjacencyMatrix(p=p,num.roots=numRoots,pa.min=numParentsMin,pa.max=numParentsMax,
                     pa.wt.min = 0.25,pa.wt.max = 0.9,prob.pos = 0.5,perm = causalOrder)
 ```
 ### Data matrix with $n=5000$
 When generating the data matrix, the possible options for the family argument are 'laplace', 'logistic', and 't', in which case the additional argument df is needed (df=10 is the default)
 ```{r,cache=T}
-n <- 5000
-X <- generateData(B=lingamParams$B,scale = scaleParam,perm = causalOrder,n = n,family = 'laplace')
+n = 5000
+X = generateData(B=lingamParams$B,scale = scaleParam,perm = causalOrder,n = n,family = 'laplace')
 dim(X)
 ```
 
@@ -77,11 +78,11 @@ dim(X)
 When estimating a topological ordering for the LiNGAM, the possible options for the family argument are 'laplace', 'logistic', and 't', in which case the additional argument df is needed (df=10 is the default)
 ```{r,cache=T}
 # neighborhoods specified to be true markov blankets
-mbhat <- moralize(lingamParams$B) 
+mbhat = moralize(lingamParams$B) 
 #
-start <- Sys.time()
-estOrder <- scorelingam(X=X,mb=mbhat,numUpdates=10,family='laplace')
-end <- Sys.time()
+start = Sys.time()
+estOrder = scorelingam(X=X,mb=mbhat,numUpdates=10,family='laplace')
+end = Sys.time()
 difftime(end,start,units='mins')
 
 ```

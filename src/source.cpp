@@ -84,7 +84,7 @@ double llr(const arma::vec & y,const std::string & family="laplace",const double
 
 // the sorting procedure used in practice
 // [[Rcpp::export()]]
-arma::uvec sortllr(const arma::mat & Xmat, const std::vector <std::vector<int>> & mb, const int & numUpdates=5,
+arma::uvec scorelingam_(const arma::mat & Xmat, const std::vector <std::vector<int>> & mb, const int & numUpdates=5,
                          const std::string & family="laplace", const double & df = 10){//family = "laplace", "logistic", "t" (df is for this case)
     int p = Xmat.n_cols;
     int n = Xmat.n_rows;
@@ -184,7 +184,7 @@ arma::uvec sortllr(const arma::mat & Xmat, const std::vector <std::vector<int>> 
 
 // weighted adjancency matrix based on known/estimated parent sets
 // [[Rcpp::export()]]
-arma::mat getWeights(const arma::mat & X,const std::vector <std::vector<unsigned int>> & pa){
+arma::mat getWeights_(const arma::mat & X,const std::vector <std::vector<unsigned int>> & pa){
   unsigned int p = X.n_cols;
   arma::mat B(p,p);
   //
@@ -203,7 +203,7 @@ arma::mat getWeights(const arma::mat & X,const std::vector <std::vector<unsigned
 
 // correlation matrix calculation
 // [[Rcpp::export()]]
-arma::mat corrMat(const arma::mat & Xmat){
+arma::mat corrMat_(const arma::mat & Xmat){
   int p = Xmat.n_cols;
   int n = Xmat.n_rows;
   //
@@ -223,16 +223,16 @@ arma::mat corrMat(const arma::mat & Xmat){
   arma::mat corMat = X.t()*X/n;
   return(corMat);
 }
-
+/*
 // Residual calculation given parent weights in B (wtd. adj. matrix)
 // [[Rcpp::export()]]
-arma::mat getResids(const arma::mat & X,const arma::mat & B){
+arma::mat getResids_(const arma::mat & X,const arma::mat & B){
   return( X-X*B );
 }
 
 // R-squared calculation given parent weights in B (wtd. adj. matrix)
 // [[Rcpp::export()]]
-arma::vec getRsq(const arma::mat & X,const arma::mat &B){
+arma::vec getRsq_(const arma::mat & X,const arma::mat &B){
   unsigned int p = X.n_cols;
   unsigned int n = X.n_rows;
   arma::mat Resids = getResids(X,B);
@@ -245,3 +245,4 @@ arma::vec getRsq(const arma::mat & X,const arma::mat &B){
   }
   return(rsq);
 }
+*/
