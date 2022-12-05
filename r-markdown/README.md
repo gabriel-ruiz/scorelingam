@@ -2,7 +2,8 @@
 title: "Some Examples of our Sorting Procedure"
 output: 
   html_document:
-    toc: true
+    self_contained: no
+
 ---
 # Installing package from Github. 
 
