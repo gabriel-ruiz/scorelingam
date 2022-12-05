@@ -1,5 +1,5 @@
 ---
-title: "R Package: scorelingam"
+title: "R Package: ScoreLiNGAM"
 output: 
   md_document:
     toc: true
@@ -17,14 +17,13 @@ See below for some examples.
 # Install package from Github. 
 
 ```{r, echo = T, eval=F}
-# install devtools, if needed. 
-require(devtools)
 # install the scorelingam package. 
 devtools::install_github(repo='gabriel-ruiz/scorelingam')
+# NOTE: install devtools prior.
 ```
 
 
-### Load scorelingam once installed
+### Load `scorelingam` once installed
 ```{r}
 library(scorelingam)
 ```
@@ -33,9 +32,9 @@ library(scorelingam)
 
 
 ## Generate data.
-### Linear SEM Parameters.
+### Linear SEM Parameters
 ```{r}
-p = 5;numRoots = 1; numParentsMin = 1; numParentsMax = 2
+p = 5; numRoots = 1; numParentsMin = 1; numParentsMax = 2
 scaleParam = runif(n=p,min=0.5,max=1.2)
 causalOrder = 5:1
 lingamParams = randomWeightedAdjacencyMatrix(p=p,num.roots=numRoots,pa.min=numParentsMin,pa.max=numParentsMax,
@@ -47,7 +46,7 @@ lingamParams = randomWeightedAdjacencyMatrix(p=p,num.roots=numRoots,pa.min=numPa
 print(lingamParams$B)
 ```
 
-### Data matrix with $n=5000$.
+### Data matrix with $n=5000$
 When generating the data matrix, the possible options for the family argument are 'laplace', 'logistic', and 't', in which case the additional argument df is needed (df=10 is the default)
 ```{r}
 n = 5000
@@ -58,7 +57,7 @@ dim(X)
 ## Obtain a topological ordering estimate and check proportion of parents sorted after a child.
 When estimating a topological ordering for the linear SEM, the possible options for the family argument are 'laplace', 'logistic', and 't', in which case the additional argument df is needed (df=10 is the default).
 
-### Specify the neighborhood sets.
+### Specify the neighborhood sets:
 ```{r order-step-small-graph}
 # neighborhoods specified to be all other nodes
 mbhat = lapply(1:ncol(X),function(j){(1:ncol(X))[-j]}) 
@@ -88,7 +87,7 @@ norm(x=lingamParams$B-Bhat,type = 'i')
 
 # A higher dimensional example: $p=10,000$.
 ## Generate data.
-### Linear SEM Parameters.
+### Linear SEM Parameters
 ```{r,cache=F}
 p = 10000;numRoots = 100; numParentsMin = 1; numParentsMax = 2
 scaleParam = runif(n=p,min=0.5,max=1.2)
@@ -97,7 +96,7 @@ lingamParams = randomWeightedAdjacencyMatrix(p=p,num.roots=numRoots,pa.min=numPa
                                              pa.max=numParentsMax, pa.wt.min = 0.25,
                                              pa.wt.max = 0.9,prob.pos = 0.5,perm = causalOrder)
 ```
-### Data matrix with $n=5000$.
+### Data matrix with $n=5000$
 When generating the data matrix, the possible options for the family argument are 'laplace', 'logistic', and 't', in which case the additional argument df is needed (df=10 is the default)
 ```{r,cache=F}
 n = 5000
