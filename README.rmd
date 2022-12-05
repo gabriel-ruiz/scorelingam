@@ -1,9 +1,19 @@
 ---
-title: "Some Examples"
+title: "R Package: scorelingam"
 output: 
   html_document:
     toc: true
 ---
+
+# Description
+
+This package implements the unsupervised learning of a topological ordering for a Linear Structural Equation Model (SEM) with non-Gaussian errors, as outlined in [Ruiz et. al (2022+)](https://openreview.net/forum?id=4pCjIGIjrt):
+
+
+> G Ruiz, OH Madrid-Padilla, Q Zhou. "Sequentially learning the topological ordering of directed acyclic graphs with likelihood ratio scores." Transactions of Machine Learning Research, 2022+. [[Link](https://openreview.net/forum?id=4pCjIGIjrt)]
+
+See below for some examples. 
+
 # Install package from Github. 
 
 ```{r, echo = T, eval=F}
