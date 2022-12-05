@@ -6,13 +6,16 @@ output:
 ---
 # Installing package from Github. 
 
-The below code chunk assumes that the helper function \texttt{R} file and algorithm source code are in the same directory as this \texttt{R} markdown file. 
-```{r,echo=FALSE}
-# install the package
+```{r, echo = T, eval=F}
+# install devtools, if needed. 
+require(devtools)
+# install the scorelingam package. 
 devtools::install_github(repo='gabriel-ruiz/scorelingam')
+```
+```{r}
+# load scorelingam once installed
 library(scorelingam)
 ```
-
 
 # An example for our parametric LiNGAM sorting procedure: $p=5$
 
@@ -92,8 +95,6 @@ difftime(end,start,units='mins')
 ```{r,cache=T}
 # check sorting errors (ideally close to zero)
 # proportion of parents sorted after child
-checkSortingErrors(estOrder=estOrder,B=lingamParams$B)
+checkSortingErrors(estOrder=estOrder,A=lingamParams$B)
 ```
 
-
-```
