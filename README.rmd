@@ -64,7 +64,7 @@ When estimating a topological ordering for the linear SEM, the possible options 
 mbhat = lapply(1:ncol(X),function(j){(1:ncol(X))[-j]}) 
 ```
 
-### Obtain the ordering estimate.
+### Obtain the ordering estimate:
 ```{r}
 estOrder = scorelingam(X=X,mb=mbhat,numUpdates=ncol(X),family='laplace')
 print(estOrder)
@@ -76,7 +76,7 @@ print(estOrder)
 checkSortingErrors(estOrder=estOrder,A=lingamParams$B)
 ```
 
-### Check accuracy of estimated weighted adjacency matrix.
+### Check accuracy of estimated weighted adjacency matrix:
 
 ```{r}
 paHat = getParents(mb=mbhat,ordering=estOrder)
@@ -123,7 +123,7 @@ end = Sys.time()
 difftime(end,start,units='mins')
 ```
 
-## Check accuracy of estimated ordering.
+## Check accuracy of estimated ordering:
 
 ```{r,cache=F}
 # check sorting errors (ideally close to zero)

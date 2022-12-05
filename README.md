@@ -20,14 +20,14 @@
         -   <a href="#specify-the-neighborhood-sets."
             id="toc-specify-the-neighborhood-sets.">Specify the neighborhood
             sets.</a>
-        -   <a href="#obtain-the-ordering-estimate."
-            id="toc-obtain-the-ordering-estimate.">Obtain the ordering estimate.</a>
+        -   <a href="#obtain-the-ordering-estimate"
+            id="toc-obtain-the-ordering-estimate">Obtain the ordering estimate:</a>
         -   <a href="#check-the-accuracy-of-the-ordering"
             id="toc-check-the-accuracy-of-the-ordering">Check the accuracy of the
             ordering:</a>
-        -   <a href="#check-accuracy-of-estimated-weighted-adjacency-matrix."
-            id="toc-check-accuracy-of-estimated-weighted-adjacency-matrix.">Check
-            accuracy of estimated weighted adjacency matrix.</a>
+        -   <a href="#check-accuracy-of-estimated-weighted-adjacency-matrix"
+            id="toc-check-accuracy-of-estimated-weighted-adjacency-matrix">Check
+            accuracy of estimated weighted adjacency matrix:</a>
 -   <a href="#a-higher-dimensional-example-p10000."
     id="toc-a-higher-dimensional-example-p10000.">A higher dimensional
     example: <span class="math inline"><em>p</em> = 10, 000</span>.</a>
@@ -44,11 +44,12 @@
         -   <a href="#specify-the-neighborhood-sets"
             id="toc-specify-the-neighborhood-sets">Specify the neighborhood
             sets:</a>
-        -   <a href="#obtain-the-ordering-estimate"
-            id="toc-obtain-the-ordering-estimate">Obtain the ordering estimate:</a>
-    -   <a href="#check-accuracy-of-estimated-ordering."
-        id="toc-check-accuracy-of-estimated-ordering.">Check accuracy of
-        estimated ordering.</a>
+        -   <a href="#obtain-the-ordering-estimate-1"
+            id="toc-obtain-the-ordering-estimate-1">Obtain the ordering
+            estimate:</a>
+    -   <a href="#check-accuracy-of-estimated-ordering"
+        id="toc-check-accuracy-of-estimated-ordering">Check accuracy of
+        estimated ordering:</a>
 
 # Overview
 
@@ -90,12 +91,12 @@ See below for some examples.
     # weighted adjacency matrix
     print(lingamParams$B)
 
-    ##            [,1]       [,2]       [,3]       [,4] [,5]
-    ## [1,]  0.0000000  0.0000000  0.0000000  0.0000000    0
-    ## [2,]  0.0000000  0.0000000  0.0000000  0.0000000    0
-    ## [3,]  0.0000000  0.0000000  0.0000000  0.0000000    0
-    ## [4,] -0.4971179 -0.3650845 -0.5566205  0.0000000    0
-    ## [5,]  0.0000000 -0.4219705  0.7577244 -0.7351462    0
+    ##           [,1]      [,2]      [,3]       [,4] [,5]
+    ## [1,] 0.0000000 0.0000000 0.0000000  0.0000000    0
+    ## [2,] 0.0000000 0.0000000 0.0000000  0.0000000    0
+    ## [3,] 0.0000000 0.5048810 0.0000000  0.0000000    0
+    ## [4,] 0.3853393 0.5883873 0.4772225  0.0000000    0
+    ## [5,] 0.2603125 0.0000000 0.3124259 -0.8937634    0
 
 ### Data matrix with *n* = 5000.
 
@@ -120,7 +121,7 @@ which case the additional argument df is needed (df=10 is the default).
     # neighborhoods specified to be all other nodes
     mbhat = lapply(1:ncol(X),function(j){(1:ncol(X))[-j]}) 
 
-### Obtain the ordering estimate.
+### Obtain the ordering estimate:
 
     estOrder = scorelingam(X=X,mb=mbhat,numUpdates=ncol(X),family='laplace')
     print(estOrder)
@@ -128,9 +129,9 @@ which case the additional argument df is needed (df=10 is the default).
     ##      [,1]
     ## [1,]    5
     ## [2,]    4
-    ## [3,]    2
-    ## [4,]    1
-    ## [5,]    3
+    ## [3,]    3
+    ## [4,]    2
+    ## [5,]    1
 
 ### Check the accuracy of the ordering:
 
@@ -139,22 +140,22 @@ which case the additional argument df is needed (df=10 is the default).
 
     ## [1] 0
 
-### Check accuracy of estimated weighted adjacency matrix.
+### Check accuracy of estimated weighted adjacency matrix:
 
     paHat = getParents(mb=mbhat,ordering=estOrder)
     (Bhat = getWeights(X=scale(X,scale=F,center=T),pa=paHat))
 
-    ##              [,1]       [,2]         [,3]       [,4] [,5]
-    ## [1,]  0.000000000  0.0000000 -0.021199269  0.0000000    0
-    ## [2,]  0.007890741  0.0000000  0.002737804  0.0000000    0
-    ## [3,]  0.000000000  0.0000000  0.000000000  0.0000000    0
-    ## [4,] -0.511831659 -0.3720026 -0.566155017  0.0000000    0
-    ## [5,] -0.013273922 -0.4351653  0.757934719 -0.7514591    0
+    ##              [,1]        [,2]      [,3]       [,4] [,5]
+    ## [1,]  0.000000000  0.00000000 0.0000000  0.0000000    0
+    ## [2,] -0.010345117  0.00000000 0.0000000  0.0000000    0
+    ## [3,]  0.002221982  0.49206986 0.0000000  0.0000000    0
+    ## [4,]  0.406513432  0.60945725 0.4780302  0.0000000    0
+    ## [5,]  0.272617690 -0.01703144 0.3077930 -0.8893524    0
 
     # maximum entry-wise difference in absolute value
     norm(x=lingamParams$B-Bhat,type = 'i')
 
-    ## [1] 0.04299186
+    ## [1] 0.0430518
 
 # A higher dimensional example: *p* = 10, 000.
 
@@ -200,12 +201,12 @@ which case the additional argument df is needed (df=10 is the default).
     end = Sys.time()
     difftime(end,start,units='mins')
 
-    ## Time difference of 1.602387 mins
+    ## Time difference of 1.45492 mins
 
-## Check accuracy of estimated ordering.
+## Check accuracy of estimated ordering:
 
     # check sorting errors (ideally close to zero)
     # proportion of parents sorted after child
     checkSortingErrors(estOrder=estOrder,A=lingamParams$B)
 
-    ## [1] 0.08684581
+    ## [1] 0.07580136
