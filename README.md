@@ -10,10 +10,10 @@
         -   <a href="#data-matrix-with-n5000" id="toc-data-matrix-with-n5000">Data
             matrix with <span class="math inline"><em>n</em> = 5000</span></a>
     -   <a
-        href="#obtain-an-estimated-ordering-and-check-proportion-of-parents-sorted-after-a-child"
-        id="toc-obtain-an-estimated-ordering-and-check-proportion-of-parents-sorted-after-a-child">Obtain
-        an estimated ordering and check proportion of parents sorted after a
-        child</a>
+        href="#obtain-a-topological-ordering-estimate-and-check-proportion-of-parents-sorted-after-a-child"
+        id="toc-obtain-a-topological-ordering-estimate-and-check-proportion-of-parents-sorted-after-a-child">Obtain
+        a topological ordering estimate and check proportion of parents sorted
+        after a child</a>
     -   <a href="#check-accuracy-of-estimated-weighted-adjacency-matrix"
         id="toc-check-accuracy-of-estimated-weighted-adjacency-matrix">Check
         accuracy of estimated weighted adjacency matrix</a>
@@ -26,9 +26,9 @@
         -   <a href="#data-matrix-with-n5000-1"
             id="toc-data-matrix-with-n5000-1">Data matrix with <span
             class="math inline"><em>n</em> = 5000</span></a>
-    -   <a href="#obtain-an-estimated-ordering-and-time-the-algorithm"
-        id="toc-obtain-an-estimated-ordering-and-time-the-algorithm">Obtain an
-        estimated ordering and time the algorithm</a>
+    -   <a href="#obtain-a-topological-ordering-estimate-and-time-the-algorithm"
+        id="toc-obtain-a-topological-ordering-estimate-and-time-the-algorithm">Obtain
+        a topological ordering estimate and time the algorithm</a>
     -   <a href="#check-accuracy-of-estimated-ordering"
         id="toc-check-accuracy-of-estimated-ordering">Check accuracy of
         estimated ordering</a>
@@ -68,15 +68,16 @@ See below for some examples.
     causalOrder = 5:1
     lingamParams = randomWeightedAdjacencyMatrix(p=p,num.roots=numRoots,pa.min=numParentsMin,pa.max=numParentsMax,
                         pa.wt.min = 0.25,pa.wt.max = 0.9,prob.pos = 0.5,perm = causalOrder)
+
     # weighted adjacency matrix
     print(lingamParams$B)
 
     ##            [,1]       [,2]      [,3]      [,4] [,5]
     ## [1,]  0.0000000  0.0000000 0.0000000 0.0000000    0
-    ## [2,] -0.8658971  0.0000000 0.0000000 0.0000000    0
-    ## [3,]  0.0000000  0.3740493 0.0000000 0.0000000    0
-    ## [4,]  0.4398528  0.0000000 0.5667361 0.0000000    0
-    ## [5,]  0.0000000 -0.5431451 0.6658132 0.5600465    0
+    ## [2,]  0.2962901  0.0000000 0.0000000 0.0000000    0
+    ## [3,]  0.0000000 -0.6416122 0.0000000 0.0000000    0
+    ## [4,] -0.3314635  0.0000000 0.0000000 0.0000000    0
+    ## [5,]  0.0000000  0.2810119 0.6299783 0.2814161    0
 
 ### Data matrix with *n* = 5000
 
@@ -90,7 +91,7 @@ additional argument df is needed (df=10 is the default)
 
     ## [1] 5000    5
 
-## Obtain an estimated ordering and check proportion of parents sorted after a child
+## Obtain a topological ordering estimate and check proportion of parents sorted after a child
 
 When estimating a topological ordering for the linear SEM, the possible
 options for the family argument are ‘laplace’, ‘logistic’, and ‘t’, in
@@ -99,6 +100,17 @@ which case the additional argument df is needed (df=10 is the default)
     # neighborhoods specified to be all other nodes
     mbhat = lapply(1:ncol(X),function(j){(1:ncol(X))[-j]}) 
     estOrder = scorelingam(X=X,mb=mbhat,numUpdates=ncol(X),family='laplace')
+    print(estOrder)
+
+    ##      [,1]
+    ## [1,]    5
+    ## [2,]    4
+    ## [3,]    3
+    ## [4,]    2
+    ## [5,]    1
+
+Check the accuracy:
+
     # check errors (ideally close to zero)
     checkSortingErrors(estOrder=estOrder,A=lingamParams$B)
 
@@ -109,17 +121,17 @@ which case the additional argument df is needed (df=10 is the default)
     paHat = getParents(mb=mbhat,ordering=estOrder)
     (Bhat = getWeights(X=scale(X,scale=F,center=T),pa=paHat))
 
-    ##              [,1]        [,2]      [,3]      [,4] [,5]
-    ## [1,]  0.000000000  0.00000000 0.0000000 0.0000000    0
-    ## [2,] -0.867640021  0.00000000 0.0000000 0.0000000    0
-    ## [3,]  0.006976615  0.34111253 0.0000000 0.0000000    0
-    ## [4,]  0.428071208  0.03702926 0.5572686 0.0000000    0
-    ## [5,] -0.002271941 -0.54496682 0.6593490 0.5764062    0
+    ##              [,1]         [,2]         [,3]      [,4] [,5]
+    ## [1,]  0.000000000  0.000000000  0.000000000 0.0000000    0
+    ## [2,]  0.317643251  0.000000000  0.000000000 0.0000000    0
+    ## [3,]  0.001925243 -0.634878958  0.000000000 0.0000000    0
+    ## [4,] -0.343863389  0.006632839 -0.007360581 0.0000000    0
+    ## [5,]  0.005213734  0.281621047  0.630385271 0.2910347    0
 
     # maximum entry-wise difference in absolute value
     norm(x=lingamParams$B-Bhat,type = 'i')
 
-    ## [1] 0.05827837
+    ## [1] 0.02639328
 
 # A higher dimensional example: *p* = 10, 000
 
@@ -145,7 +157,7 @@ additional argument df is needed (df=10 is the default)
 
     ## [1]  5000 10000
 
-## Obtain an estimated ordering and time the algorithm
+## Obtain a topological ordering estimate and time the algorithm
 
 When estimating a topological ordering for the Linear SEM, the possible
 options for the family argument are ‘laplace’, ‘logistic’, and ‘t’, in
@@ -159,7 +171,7 @@ which case the additional argument df is needed (df=10 is the default)
     end = Sys.time()
     difftime(end,start,units='mins')
 
-    ## Time difference of 1.522094 mins
+    ## Time difference of 1.529489 mins
 
 ## Check accuracy of estimated ordering
 
@@ -167,4 +179,4 @@ which case the additional argument df is needed (df=10 is the default)
     # proportion of parents sorted after child
     checkSortingErrors(estOrder=estOrder,A=lingamParams$B)
 
-    ## [1] 0.05136318
+    ## [1] 0.08044655

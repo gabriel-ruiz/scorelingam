@@ -22,6 +22,8 @@ require(devtools)
 # install the scorelingam package. 
 devtools::install_github(repo='gabriel-ruiz/scorelingam')
 ```
+
+
 ```{r}
 # load scorelingam once installed
 library(scorelingam)
@@ -38,9 +40,13 @@ scaleParam = runif(n=p,min=0.5,max=1.2)
 causalOrder = 5:1
 lingamParams = randomWeightedAdjacencyMatrix(p=p,num.roots=numRoots,pa.min=numParentsMin,pa.max=numParentsMax,
                     pa.wt.min = 0.25,pa.wt.max = 0.9,prob.pos = 0.5,perm = causalOrder)
+```
+
+```{r}
 # weighted adjacency matrix
 print(lingamParams$B)
 ```
+
 ### Data matrix with $n=5000$
 When generating the data matrix, the possible options for the family argument are 'laplace', 'logistic', and 't', in which case the additional argument df is needed (df=10 is the default)
 ```{r}
@@ -49,12 +55,17 @@ X = generateData(B=lingamParams$B,scale = scaleParam,perm = causalOrder,n = n,fa
 dim(X)
 ```
 
-## Obtain an estimated ordering and check proportion of parents sorted after a child
+## Obtain a topological ordering estimate and check proportion of parents sorted after a child
 When estimating a topological ordering for the linear SEM, the possible options for the family argument are 'laplace', 'logistic', and 't', in which case the additional argument df is needed (df=10 is the default)
 ```{r order-step-small-graph}
 # neighborhoods specified to be all other nodes
 mbhat = lapply(1:ncol(X),function(j){(1:ncol(X))[-j]}) 
 estOrder = scorelingam(X=X,mb=mbhat,numUpdates=ncol(X),family='laplace')
+print(estOrder)
+```
+
+Check the accuracy: 
+```{r}
 # check errors (ideally close to zero)
 checkSortingErrors(estOrder=estOrder,A=lingamParams$B)
 ```
@@ -87,7 +98,7 @@ X = generateData(B=lingamParams$B,scale = scaleParam,perm = causalOrder,n = n,fa
 dim(X)
 ```
 
-## Obtain an estimated ordering and time the algorithm
+## Obtain a topological ordering estimate and time the algorithm
 When estimating a topological ordering for the Linear SEM, the possible options for the family argument are 'laplace', 'logistic', and 't', in which case the additional argument df is needed (df=10 is the default)
 ```{r,cache=F}
 # neighborhoods specified to be true markov blankets
