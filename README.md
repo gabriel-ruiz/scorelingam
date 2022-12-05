@@ -1,14 +1,12 @@
 -   <a href="#description" id="toc-description">Description</a>
 -   <a href="#install-package-from-github."
     id="toc-install-package-from-github.">Install package from Github.</a>
--   <a href="#an-example-for-our-parametric-lingam-sorting-procedure-p5"
-    id="toc-an-example-for-our-parametric-lingam-sorting-procedure-p5">An
-    example for our parametric LiNGAM sorting procedure: <span
-    class="math inline"><em>p</em> = 5</span></a>
-    -   <a href="#generate-data-from-a-lingam"
-        id="toc-generate-data-from-a-lingam">Generate data from a LiNGAM</a>
-        -   <a href="#lingam-parameters" id="toc-lingam-parameters">LiNGAM
-            Parameters</a>
+-   <a href="#an-example-for-our-sorting-procedure-p5"
+    id="toc-an-example-for-our-sorting-procedure-p5">An example for our
+    sorting procedure: <span class="math inline"><em>p</em> = 5</span></a>
+    -   <a href="#generate-data" id="toc-generate-data">Generate data</a>
+        -   <a href="#linear-sem-parameters" id="toc-linear-sem-parameters">Linear
+            SEM Parameters</a>
         -   <a href="#data-matrix-with-n5000" id="toc-data-matrix-with-n5000">Data
             matrix with <span class="math inline"><em>n</em> = 5000</span></a>
     -   <a
@@ -22,10 +20,9 @@
 -   <a href="#a-higher-dimensional-example-p10000"
     id="toc-a-higher-dimensional-example-p10000">A higher dimensional
     example: <span class="math inline"><em>p</em> = 10, 000</span></a>
-    -   <a href="#generate-data-from-a-lingam-1"
-        id="toc-generate-data-from-a-lingam-1">Generate data from a LiNGAM</a>
-        -   <a href="#lingam-parameters-1" id="toc-lingam-parameters-1">LiNGAM
-            Parameters</a>
+    -   <a href="#generate-data-1" id="toc-generate-data-1">Generate data</a>
+        -   <a href="#linear-sem-parameters-1"
+            id="toc-linear-sem-parameters-1">Linear SEM Parameters</a>
         -   <a href="#data-matrix-with-n5000-1"
             id="toc-data-matrix-with-n5000-1">Data matrix with <span
             class="math inline"><em>n</em> = 5000</span></a>
@@ -60,11 +57,11 @@ See below for some examples.
     # load scorelingam once installed
     library(scorelingam)
 
-# An example for our parametric LiNGAM sorting procedure: *p* = 5
+# An example for our sorting procedure: *p* = 5
 
-## Generate data from a LiNGAM
+## Generate data
 
-### LiNGAM Parameters
+### Linear SEM Parameters
 
     p = 5;numRoots = 1; numParentsMin = 1; numParentsMax = 2
     scaleParam = runif(n=p,min=0.5,max=1.2)
@@ -74,12 +71,12 @@ See below for some examples.
     # weighted adjacency matrix
     print(lingamParams$B)
 
-    ##           [,1]       [,2]       [,3]      [,4] [,5]
-    ## [1,] 0.0000000  0.0000000  0.0000000 0.0000000    0
-    ## [2,] 0.6981063  0.0000000  0.0000000 0.0000000    0
-    ## [3,] 0.0000000 -0.5356761  0.0000000 0.0000000    0
-    ## [4,] 0.0000000  0.8203790 -0.5360489 0.0000000    0
-    ## [5,] 0.0000000  0.0000000 -0.2934126 0.8358868    0
+    ##            [,1]       [,2]      [,3]      [,4] [,5]
+    ## [1,]  0.0000000  0.0000000 0.0000000 0.0000000    0
+    ## [2,] -0.8658971  0.0000000 0.0000000 0.0000000    0
+    ## [3,]  0.0000000  0.3740493 0.0000000 0.0000000    0
+    ## [4,]  0.4398528  0.0000000 0.5667361 0.0000000    0
+    ## [5,]  0.0000000 -0.5431451 0.6658132 0.5600465    0
 
 ### Data matrix with *n* = 5000
 
@@ -95,7 +92,7 @@ additional argument df is needed (df=10 is the default)
 
 ## Obtain an estimated ordering and check proportion of parents sorted after a child
 
-When estimating a topological ordering for the LiNGAM, the possible
+When estimating a topological ordering for the linear SEM, the possible
 options for the family argument are ‘laplace’, ‘logistic’, and ‘t’, in
 which case the additional argument df is needed (df=10 is the default)
 
@@ -112,23 +109,23 @@ which case the additional argument df is needed (df=10 is the default)
     paHat = getParents(mb=mbhat,ordering=estOrder)
     (Bhat = getWeights(X=scale(X,scale=F,center=T),pa=paHat))
 
-    ##              [,1]        [,2]       [,3]      [,4] [,5]
-    ## [1,]  0.000000000  0.00000000  0.0000000 0.0000000    0
-    ## [2,]  0.711393671  0.00000000  0.0000000 0.0000000    0
-    ## [3,] -0.011840227 -0.54289744  0.0000000 0.0000000    0
-    ## [4,] -0.005132104  0.80998546 -0.5385824 0.0000000    0
-    ## [5,] -0.020120895 -0.01092783 -0.3236077 0.8459232    0
+    ##              [,1]        [,2]      [,3]      [,4] [,5]
+    ## [1,]  0.000000000  0.00000000 0.0000000 0.0000000    0
+    ## [2,] -0.867640021  0.00000000 0.0000000 0.0000000    0
+    ## [3,]  0.006976615  0.34111253 0.0000000 0.0000000    0
+    ## [4,]  0.428071208  0.03702926 0.5572686 0.0000000    0
+    ## [5,] -0.002271941 -0.54496682 0.6593490 0.5764062    0
 
     # maximum entry-wise difference in absolute value
     norm(x=lingamParams$B-Bhat,type = 'i')
 
-    ## [1] 0.0712802
+    ## [1] 0.05827837
 
 # A higher dimensional example: *p* = 10, 000
 
-## Generate data from a LiNGAM
+## Generate data
 
-### LiNGAM Parameters
+### Linear SEM Parameters
 
     p = 10000;numRoots = 100; numParentsMin = 1; numParentsMax = 2
     scaleParam = runif(n=p,min=0.5,max=1.2)
@@ -150,7 +147,7 @@ additional argument df is needed (df=10 is the default)
 
 ## Obtain an estimated ordering and time the algorithm
 
-When estimating a topological ordering for the LiNGAM, the possible
+When estimating a topological ordering for the Linear SEM, the possible
 options for the family argument are ‘laplace’, ‘logistic’, and ‘t’, in
 which case the additional argument df is needed (df=10 is the default)
 
@@ -162,7 +159,7 @@ which case the additional argument df is needed (df=10 is the default)
     end = Sys.time()
     difftime(end,start,units='mins')
 
-    ## Time difference of 1.464676 mins
+    ## Time difference of 1.522094 mins
 
 ## Check accuracy of estimated ordering
 
@@ -170,4 +167,4 @@ which case the additional argument df is needed (df=10 is the default)
     # proportion of parents sorted after child
     checkSortingErrors(estOrder=estOrder,A=lingamParams$B)
 
-    ## [1] 0.07719747
+    ## [1] 0.05136318
