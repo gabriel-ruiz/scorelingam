@@ -9,8 +9,7 @@
   Implements the sorting procedure outlined in \href{https://openreview.net/forum?id=4pCjIGIjrt}{Ruiz et. al (2022+)}. 
 }
 \details{
-  This section should provide a more detailed overview of how to use the
-  package, including the most important functions.
+  The main procedure is `scorelingam`. See documentation below for more info. See the examples at https://github.com/gabriel-ruiz/scorelingam.
 }
 \author{
 Gabriel Ruiz
