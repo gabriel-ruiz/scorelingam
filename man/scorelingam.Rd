@@ -11,14 +11,14 @@ scorelingam(X, mb, numUpdates = 5L, family = "laplace", df = 10)
 
 \item{mb}{A length p list object whose j-th entry gives the Markov blanket of node j (or its superset).}
 
-\item{numUpdates}{The number of updates to give while sorting. Default: numUpdates=5.}
+\item{numUpdates}{The number of updates to give while sorting. Default: \code{numUpdates=5}.}
 
-\item{family}{Currently allows 't', 'laplace' (default), or 'logistic'.}
+\item{family}{Currently allows \code{'t'}, \code{'laplace'} (default), or \code{'logistic'}.}
 
-\item{df}{Degrees of freedom for scaled-t-distributed noise. Default: df=10.}
+\item{df}{Degrees of freedom for scaled-t-distributed noise. Default: \code{df=10}.}
 }
 \value{
-A length p vector with the specified topological ordering of the nodes in the underlying DAG. Its unique elements correspond to the indices 1,2,...,p.
+A length p vector with the specified topological ordering of the nodes in the underlying DAG. Its unique elements are a re-ordering of the indices 1,2,...,p.
 }
 \description{
 The ScoreLiNGAM sorting procedure.

@@ -7,7 +7,7 @@
 checkSortingErrors(estOrder, A)
 }
 \arguments{
-\item{estOrder:}{A length p vector with the estimated topological ordering. Its unique elements correspond to the indices 1,2,...,p.}
+\item{estOrder:}{A length p vector with the estimated topological ordering. Its unique elements are a re-ordering of the indices 1,2,...,p.}
 
 \item{A:}{The true DAG adjacency matrix.}
 }

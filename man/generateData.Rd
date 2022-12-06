@@ -16,11 +16,13 @@ generateData(
 \arguments{
 \item{B}{A p by p weighted adjacency matrix for an acyclic linear SEM.}
 
-\item{n}{The desired sample size. Default: n=1000.}
+\item{n}{The desired sample size. Default: \code{n=1000}.}
 
 \item{family}{Currently allow 't', 'laplace' (default), or 'logistic'.}
 
-\item{df}{Degrees of freedom for scaled-t-distributed noise. Default: df=5.}
+\item{scale}{Length p vector s.t. \eqn{{\rm var}[\epsilon_j] =}\eqn{\left({\rm scale[j]}\right)^2}\eqn{\times {\rm var}[\epsilon_0]} with \eqn{\epsilon_0\sim {\rm family}(1) } (the chosen family with scale parameter 1). Default: \code{scale=rep(1,ncol(B))}.}
+
+\item{df}{Degrees of freedom for scaled-t-distributed noise. Default: \code{df=5}.}
 }
 \value{
 An n by p matrix object.

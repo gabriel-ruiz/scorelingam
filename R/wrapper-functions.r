@@ -4,17 +4,17 @@
 #' The ScoreLiNGAM sorting procedure.
 #' @param X An n by p data matrix which is used to estimate the permutation. 
 #' @param mb A length p list object whose j-th entry gives the Markov blanket of node j (or its superset).
-#' @param numUpdates The number of updates to give while sorting. Default: numUpdates=5.
-#' @param family Currently allows 't', 'laplace' (default), or 'logistic'.
-#' @param df Degrees of freedom for scaled-t-distributed noise. Default: df=10.
-#' @return A length p vector with the specified topological ordering of the nodes in the underlying DAG. Its unique elements correspond to the indices 1,2,...,p. 
+#' @param numUpdates The number of updates to give while sorting. Default: \code{numUpdates=5}.
+#' @param family Currently allows \code{'t'}, \code{'laplace'} (default), or \code{'logistic'}.
+#' @param df Degrees of freedom for scaled-t-distributed noise. Default: \code{df=10}.
+#' @return A length p vector with the specified topological ordering of the nodes in the underlying DAG. Its unique elements are a re-ordering of the indices 1,2,...,p. 
 #' @export
 scorelingam <- function(X, mb, numUpdates = 5L, family = "laplace", df = 10) {
   scorelingam_( X, mb, numUpdates, family, df)
 }
 
 #' Get weighted adjancency matrix for linear SEM.
-#' Assumes that X is zero-centered, which can be done via X=scale(Xoriginal,center=T,scale=F).
+#' Assumes that \code{X} is zero-centered, which can be done via \code{X=scale(Xoriginal,center=T,scale=F)}.
 #' Estimation is done via Ordinary Least Squares (OLS) regression.
 #' @param X An n by p data matrix which is used to estimate the weighted adjacency matrix. 
 #' @param pa A length p list object whose j-th entry gives the support for node j's parent set.
@@ -43,13 +43,13 @@ corrMat <- function(X) {
 #' The parent weight (in absolute value) is between pa.wt.min and pa.wt.max.
 #' The parent weight is positive with probability prob.pos (else, negative).
 #' @param p Number of nodes in underlying DAG.
-#' @param num.roots Number of root nodes in underlying DAG. Default: num.roots=p-1.
-#' @param pa.min Minimum number of parents a node can have. Default: pa.min=1.  
-#' @param pa.max Maximum number of parents a node can have. Default: pa.max=1.  
-#' @param pa.wt.min The minimum (in absolute value) coefficient value for the parent to a child in the linear SEM. Default: pa.wt.min=1.
-#' @param pa.wt.max The maximum (in absolute value) coefficient value for the parent to a child in the linear SEM. Default: pa.wt.max=1.
-#' @param prob.pos The probability of a positive coefficient value for the parent to a child in the the linear SEM. Default: prob.pos=0.5.
-#' @param perm A topological ordering for underlying DAG. Default is random.
+#' @param num.roots Number of root nodes in underlying DAG. Default: \code{num.roots=p-1}.
+#' @param pa.min Minimum number of parents a node can have. Default: \code{pa.min=1}.  
+#' @param pa.max Maximum number of parents a node can have. Default: \code{pa.max=1}.  
+#' @param pa.wt.min The minimum (in absolute value) coefficient value for the parent to a child in the linear SEM. Default: \code{pa.wt.min=1}.
+#' @param pa.wt.max The maximum (in absolute value) coefficient value for the parent to a child in the linear SEM. Default: \code{pa.wt.max=1}.
+#' @param prob.pos The probability of a positive coefficient value for the parent to a child in the the linear SEM. Default: \cdoe{prob.pos=0.5}.
+#' @param perm A topological ordering for underlying DAG. Default is \code{perm=sample(p,p,replace=F)}.
 #' @return A list with two elements: perm (the topological ordering used) and B (the weighted adjacency matrix).
 #' @export
 randomWeightedAdjacencyMatrix <- function( p,num.roots=p-1, pa.min=1, pa.max=1,pa.wt.min=1,pa.wt.max=1,
@@ -89,10 +89,10 @@ randomWeightedAdjacencyMatrix <- function( p,num.roots=p-1, pa.min=1, pa.max=1,p
 
 #' Generate Linear (laplace, logistic, or scaled-t error family) Structural Equation Model Data
 #' @param B A p by p weighted adjacency matrix for an acyclic linear SEM. 
-#' @param n The desired sample size. Default: n=1000.
+#' @param n The desired sample size. Default: \code{n=1000}.
 #' @param family Currently allow 't', 'laplace' (default), or 'logistic'.
-#' @param scale Length p vector s.t. \eqn{{\rm var}[\epsilon_j] = \left({\rm scale[j]}\right)^2\eqn{\times {\rm var}[\epsilon_0]} with \eqn{\epsilon_0\sim {\rm family}(1) } (the chosen family with scale parameter 1). Default: scale=rep(1,ncol(B)).
-#' @param df Degrees of freedom for scaled-t-distributed noise. Default: df=5.
+#' @param scale Length p vector s.t. \eqn{{\rm var}[\epsilon_j] =}\eqn{\left({\rm scale[j]}\right)^2}\eqn{\times {\rm var}[\epsilon_0]} with \eqn{\epsilon_0\sim {\rm family}(1) } (the chosen family with scale parameter 1). Default: \code{scale=rep(1,ncol(B))}.
+#' @param df Degrees of freedom for scaled-t-distributed noise. Default: \code{df=5}.
 #' @return An n by p matrix object.
 #' @export
 generateData <- function(B,n=1e3,family='laplace',scale=rep(1,ncol(B)),perm=topoSort(as.matrix(B)),df=5){
@@ -155,7 +155,7 @@ dlap <- function(x,center=mean(x),shape=mean(abs(x-center)),log=F){
 
 
 #' Sorting Error. 
-#' @param estOrder: A length p vector with the estimated topological ordering. Its unique elements correspond to the indices 1,2,...,p. 
+#' @param estOrder: A length p vector with the estimated topological ordering. Its unique elements are a re-ordering of the indices 1,2,...,p. 
 #' @param A: The true DAG adjacency matrix. 
 #' @return Returns proportion of parents sorted after children. See Equation (11) in the paper, which defines the output of this function: \eqn{{\rm ERR}(\hat{\pi})}.
 #' @export
@@ -189,8 +189,8 @@ checkSortingErrors <- function(estOrder,A){
 
 #' Moralize a DAG. 
 #' Obtain Markov Blanket, the union of all children, parents, co-parents.
-#' @param B The p by p weighted adjacency matrix. Assumes B[j,k]!=0 if \eqn{j\in PA_k}.
-#' @return A list of length p. Each entry j corresponds to the Markov Blanket of node j according to adjacency matrix B.
+#' @param B The p by p weighted adjacency matrix. Assumes \code{B[j,k]!=0} if \eqn{j\in PA_k}.
+#' @return A list of length p. Each entry j corresponds to the Markov Blanket of node j according to adjacency matrix \code{B}.
 #' @export
 moralize <- function(B){ #markov blanket for each node
   p <- ncol(B)
@@ -212,7 +212,7 @@ moralize <- function(B){ #markov blanket for each node
 }
 
 #
-#' Skeleton for an undirected graph based on Markov Blanket (or neighborhood estimates) of each node.
+#' Adjacency matrix for an undirected (moral) graph based on Markov Blanket (or neighborhood estimates) of each node.
 #' @param mb The Markov blanket or neighborhood estiamtes. A list of length p.
 #' @return A p by p adjacency matrix for an undirected graph. 0 indicates no undirected edge in the graph, while 1 indicates an directed edge in the graph.
 #' @export
@@ -231,7 +231,7 @@ skeleton <- function(mb){
 
 #' Get parent sets given Markov blanket and topological ordering
 #' @param mb A length p list object whose j-th entry gives the Markov blanket of node j. The j-th entry can also be some other set that defines the possible support for the parent set.
-#' @param ordering: A length p vector with the specified topological ordering of the nodes in the underlying DAG. Its unique elements correspond to the indices 1,2,...,p. 
+#' @param ordering: A length p vector with the specified topological ordering of the nodes in the underlying DAG. Its unique elements are a re-ordering of the indices 1,2,...,p. 
 #' @return A list object of length p; entry j denotes the parent set of node j in the underlying DAG.
 #' @export
 getParents <- function(mb,ordering){
@@ -247,7 +247,7 @@ getParents <- function(mb,ordering){
 #' #' @param X An n by p data matrix which is used to estimate the weighted adjacency matrix. 
 #' #' @param mb A length p list object whose j-th entry gives the Markov blanket of node j. The j-th entry can also be some other set that defines the possible support for the parent set.
 #' #' @param ordering A length p vector which gives the specified topological ordering of the nodes in the underlying DAG.
-#' #' @return A list object of length 2. Entry Bhat gives the estimated p by p adjacency matrix, while B0hat is a length p vector containing the intercept terms, if any, in the linear SEM. 
+#' #' @return A list object of length 2. Entry \code{'Bhat'} gives the estimated p by p adjacency matrix, while \code{'B0hat'} is a length p vector containing the intercept terms, if any, in the linear SEM. 
 #' getParams <- function(X,mbhat,ordering){
 #'   p <- ncol(X)
 #'   n <- nrow(X)

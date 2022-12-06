@@ -2,7 +2,7 @@
 % Please edit documentation in R/wrapper-functions.r
 \name{skeleton}
 \alias{skeleton}
-\title{Skeleton for an undirected graph based on Markov Blanket (or neighborhood estimates) of each node.}
+\title{Adjacency matrix for an undirected (moral) graph based on Markov Blanket (or neighborhood estimates) of each node.}
 \usage{
 skeleton(mb)
 }
@@ -13,5 +13,5 @@ skeleton(mb)
 A p by p adjacency matrix for an undirected graph. 0 indicates no undirected edge in the graph, while 1 indicates an directed edge in the graph.
 }
 \description{
-Skeleton for an undirected graph based on Markov Blanket (or neighborhood estimates) of each node.
+Adjacency matrix for an undirected (moral) graph based on Markov Blanket (or neighborhood estimates) of each node.
 }

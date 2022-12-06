@@ -8,10 +8,10 @@ Obtain Markov Blanket, the union of all children, parents, co-parents.}
 moralize(B)
 }
 \arguments{
-\item{B}{The p by p weighted adjacency matrix. Assumes B[j,k]!=0 if \eqn{j\in PA_k}.}
+\item{B}{The p by p weighted adjacency matrix. Assumes \code{B[j,k]!=0} if \eqn{j\in PA_k}.}
 }
 \value{
-A list of length p. Each entry j corresponds to the Markov Blanket of node j according to adjacency matrix B.
+A list of length p. Each entry j corresponds to the Markov Blanket of node j according to adjacency matrix \code{B}.
 }
 \description{
 Moralize a DAG. 

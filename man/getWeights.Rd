@@ -3,7 +3,7 @@
 \name{getWeights}
 \alias{getWeights}
 \title{Get weighted adjancency matrix for linear SEM.
-Assumes that X is zero-centered, which can be done via X=scale(Xoriginal,center=T,scale=F).
+Assumes that \code{X} is zero-centered, which can be done via \code{X=scale(Xoriginal,center=T,scale=F)}.
 Estimation is done via Ordinary Least Squares (OLS) regression.}
 \usage{
 getWeights(X, pa)
@@ -18,6 +18,6 @@ A p by p weighted adjacency matrix for the linear SEM.
 }
 \description{
 Get weighted adjancency matrix for linear SEM.
-Assumes that X is zero-centered, which can be done via X=scale(Xoriginal,center=T,scale=F).
+Assumes that \code{X} is zero-centered, which can be done via \code{X=scale(Xoriginal,center=T,scale=F)}.
 Estimation is done via Ordinary Least Squares (OLS) regression.
 }
