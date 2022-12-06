@@ -33,7 +33,7 @@ outlined in [Ruiz et. al
 
 > G Ruiz, OH Madrid-Padilla, Q Zhou. “Sequentially learning the
 > topological ordering of directed acyclic graphs with likelihood ratio
-> scores.” Transactions of Machine Learning Research, 2022+.
+> scores.” Transactions on Machine Learning Research, 2022+.
 > \[[Link](https://openreview.net/forum?id=4pCjIGIjrt)\]
 
 ## Package Docummentation
@@ -43,12 +43,11 @@ See below for some examples.
 
 ## Installation
 
-Install the `devtools` package prior to installation, if needed.
+The package `devtools` is needed for installation.
 
-    # install the scorelingam package. 
     devtools::install_github(repo='gabriel-ruiz/scorelingam')
 
-Load `scorelingam` once installed:
+Load `scorelingam` once installed.
 
     library(scorelingam)
 
@@ -67,12 +66,12 @@ Load `scorelingam` once installed:
     # weighted adjacency matrix
     print(lingamParams$B)
 
-    ##           [,1]      [,2]      [,3]       [,4] [,5]
-    ## [1,]  0.000000 0.0000000 0.0000000  0.0000000    0
-    ## [2,]  0.000000 0.0000000 0.0000000  0.0000000    0
-    ## [3,]  0.000000 0.7431393 0.0000000  0.0000000    0
-    ## [4,]  0.000000 0.0000000 0.7934875  0.0000000    0
-    ## [5,] -0.671811 0.0000000 0.6109425 -0.4453305    0
+    ##           [,1]       [,2]       [,3]      [,4] [,5]
+    ## [1,] 0.0000000  0.0000000  0.0000000 0.0000000    0
+    ## [2,] 0.3839051  0.0000000  0.0000000 0.0000000    0
+    ## [3,] 0.4824674 -0.8666502  0.0000000 0.0000000    0
+    ## [4,] 0.0000000  0.0000000  0.6784132 0.0000000    0
+    ## [5,] 0.0000000  0.0000000 -0.5450611 0.6573171    0
 
 ### Data matrix with *n* = 5000
 
@@ -92,12 +91,12 @@ When estimating a topological ordering for the linear SEM, the possible
 options for the family argument are ‘laplace’, ‘logistic’, and ‘t’, in
 which case the additional argument df is needed (df=10 is the default).
 
-### Specify the neighborhood sets:
+### Specify the neighborhood sets
 
     # neighborhoods specified to be all other nodes
     mbhat = lapply(1:ncol(X),function(j){(1:ncol(X))[-j]}) 
 
-### Obtain the ordering estimate:
+### Obtain the ordering estimate
 
     estOrder = scorelingam(X=X,mb=mbhat,numUpdates=ncol(X),family='laplace')
     print(estOrder)
@@ -105,9 +104,9 @@ which case the additional argument df is needed (df=10 is the default).
     ##      [,1]
     ## [1,]    5
     ## [2,]    4
-    ## [3,]    1
-    ## [4,]    3
-    ## [5,]    2
+    ## [3,]    3
+    ## [4,]    2
+    ## [5,]    1
 
 ## Check the accuracy of the ordering
 
@@ -119,22 +118,22 @@ better).
 
     ## [1] 0
 
-### Check accuracy of estimated weighted adjacency matrix:
+### Check accuracy of estimated weighted adjacency matrix
 
     paHat = getParents(mb=mbhat,ordering=estOrder)
     (Bhat = getWeights(X=scale(X,scale=F,center=T),pa=paHat))
 
-    ##             [,1]         [,2]        [,3]       [,4] [,5]
-    ## [1,]  0.00000000 -0.003000909 -0.02518004  0.0000000    0
-    ## [2,]  0.00000000  0.000000000  0.00000000  0.0000000    0
-    ## [3,]  0.00000000  0.715631088  0.00000000  0.0000000    0
-    ## [4,] -0.01652637  0.027786346  0.79094791  0.0000000    0
-    ## [5,] -0.70929853 -0.019323454  0.64238449 -0.4613663    0
+    ##              [,1]        [,2]       [,3]      [,4] [,5]
+    ## [1,]  0.000000000  0.00000000  0.0000000 0.0000000    0
+    ## [2,]  0.391906115  0.00000000  0.0000000 0.0000000    0
+    ## [3,]  0.494511285 -0.85062512  0.0000000 0.0000000    0
+    ## [4,] -0.008728058 -0.03435524  0.6737897 0.0000000    0
+    ## [5,]  0.007557937  0.02683172 -0.5371846 0.6568952    0
 
     # maximum entry-wise difference in absolute value
     norm(x=lingamParams$B-Bhat,type = 'i')
 
-    ## [1] 0.1042888
+    ## [1] 0.0477068
 
 # A higher dimensional example: *p* = 10, 000
 
@@ -179,7 +178,7 @@ which case the additional argument df is needed (df=10 is the default).
     end = Sys.time()
     difftime(end,start,units='mins')
 
-    ## Time difference of 1.918385 mins
+    ## Time difference of 2.0367 mins
 
 ## Check accuracy of estimated ordering
 
@@ -188,4 +187,4 @@ better).
 
     checkSortingErrors(estOrder=estOrder,A=lingamParams$B)
 
-    ## [1] 0.07290826
+    ## [1] 0.08549762

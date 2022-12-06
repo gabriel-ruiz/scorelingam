@@ -13,7 +13,7 @@ output:
 This package implements the estimation of a topological ordering for a Linear Structural Equation Model (SEM) with non-Gaussian errors, as outlined in [Ruiz et. al (2022+)](https://openreview.net/forum?id=4pCjIGIjrt):
 
 
-> G Ruiz, OH Madrid-Padilla, Q Zhou. "Sequentially learning the topological ordering of directed acyclic graphs with likelihood ratio scores." Transactions of Machine Learning Research, 2022+. [[Link](https://openreview.net/forum?id=4pCjIGIjrt)]
+> G Ruiz, OH Madrid-Padilla, Q Zhou. "Sequentially learning the topological ordering of directed acyclic graphs with likelihood ratio scores." Transactions on Machine Learning Research, 2022+. [[Link](https://openreview.net/forum?id=4pCjIGIjrt)]
 
 ## Package Docummentation
 
@@ -23,14 +23,13 @@ See below for some examples.
 
 ## Installation
 
-Install the `devtools` package prior to installation, if needed.
+The package `devtools` is needed for installation.
 
 ```{r, echo = T, eval=F}
-# install the scorelingam package. 
 devtools::install_github(repo='gabriel-ruiz/scorelingam')
 ```
 
-Load `scorelingam` once installed:
+Load `scorelingam` once installed.
 ```{r}
 library(scorelingam)
 ```
@@ -64,13 +63,13 @@ dim(X)
 ## Obtain a topological ordering estimate 
 When estimating a topological ordering for the linear SEM, the possible options for the family argument are 'laplace', 'logistic', and 't', in which case the additional argument df is needed (df=10 is the default).
 
-### Specify the neighborhood sets:
+### Specify the neighborhood sets
 ```{r order-step-small-graph}
 # neighborhoods specified to be all other nodes
 mbhat = lapply(1:ncol(X),function(j){(1:ncol(X))[-j]}) 
 ```
 
-### Obtain the ordering estimate:
+### Obtain the ordering estimate
 ```{r}
 estOrder = scorelingam(X=X,mb=mbhat,numUpdates=ncol(X),family='laplace')
 print(estOrder)
@@ -84,7 +83,7 @@ Calculate the proportion of parents sorted after a child (lower is better).
 checkSortingErrors(estOrder=estOrder,A=lingamParams$B)
 ```
 
-### Check accuracy of estimated weighted adjacency matrix:
+### Check accuracy of estimated weighted adjacency matrix
 ```{r}
 paHat = getParents(mb=mbhat,ordering=estOrder)
 (Bhat = getWeights(X=scale(X,scale=F,center=T),pa=paHat))
