@@ -3,7 +3,10 @@ title: "R Package: ScoreLiNGAM"
 output: 
   md_document:
     toc: true
+    toc_depth: 2
 ---
+
+
 
 # Overview
 
@@ -12,26 +15,30 @@ This package implements the estimation of a topological ordering for a Linear St
 
 > G Ruiz, OH Madrid-Padilla, Q Zhou. "Sequentially learning the topological ordering of directed acyclic graphs with likelihood ratio scores." Transactions of Machine Learning Research, 2022+. [[Link](https://openreview.net/forum?id=4pCjIGIjrt)]
 
+## Package Docummentation
+
+See the [manual](./man/scorelingam_1.0.pdf) for function documentation. 
 See below for some examples. 
 
-# Install package from Github. 
+
+## Installation
+
+Install the `devtools` package prior to installation, if needed.
 
 ```{r, echo = T, eval=F}
 # install the scorelingam package. 
 devtools::install_github(repo='gabriel-ruiz/scorelingam')
-# NOTE: install devtools prior.
 ```
 
-
-### Load `scorelingam` once installed
+Load `scorelingam` once installed:
 ```{r}
 library(scorelingam)
 ```
 
-# An example for our sorting procedure: $p=5$.
+# An example for our sorting procedure: $p=5$
 
 
-## Generate data.
+## Generate data
 ### Linear SEM Parameters
 ```{r}
 p = 5; numRoots = 1; numParentsMin = 1; numParentsMax = 2
@@ -54,7 +61,7 @@ X = generateData(B=lingamParams$B,scale = scaleParam,perm = causalOrder,n = n,fa
 dim(X)
 ```
 
-## Obtain a topological ordering estimate and check proportion of parents sorted after a child.
+## Obtain a topological ordering estimate 
 When estimating a topological ordering for the linear SEM, the possible options for the family argument are 'laplace', 'logistic', and 't', in which case the additional argument df is needed (df=10 is the default).
 
 ### Specify the neighborhood sets:
@@ -69,14 +76,15 @@ estOrder = scorelingam(X=X,mb=mbhat,numUpdates=ncol(X),family='laplace')
 print(estOrder)
 ```
 
-### Check the accuracy of the ordering: 
+## Check the accuracy of the ordering
+
+Calculate the proportion of parents sorted after a child (lower is better).
 ```{r}
 # check errors (ideally close to zero)
 checkSortingErrors(estOrder=estOrder,A=lingamParams$B)
 ```
 
 ### Check accuracy of estimated weighted adjacency matrix:
-
 ```{r}
 paHat = getParents(mb=mbhat,ordering=estOrder)
 (Bhat = getWeights(X=scale(X,scale=F,center=T),pa=paHat))
@@ -85,8 +93,8 @@ norm(x=lingamParams$B-Bhat,type = 'i')
 ```
 
 
-# A higher dimensional example: $p=10,000$.
-## Generate data.
+# A higher dimensional example: $p=10,000$
+## Generate data
 ### Linear SEM Parameters
 ```{r,cache=F}
 p = 10000;numRoots = 100; numParentsMin = 1; numParentsMax = 2
@@ -107,26 +115,24 @@ dim(X)
 ## Obtain a topological ordering estimate and time the algorithm.
 When estimating a topological ordering for the Linear SEM, the possible options for the family argument are 'laplace', 'logistic', and 't', in which case the additional argument df is needed (df=10 is the default).
 
-### Specify the neighborhood sets:
+### Specify the neighborhood sets
 ```{r,cache=F}
 # neighborhoods specified to be true markov blankets
 mbhat = moralize(lingamParams$B) 
-#
 ```
 
-### Obtain the ordering estimate:
-```{r}
+### Obtain the ordering estimate
+```{r sorting-step-highdim,cache=F}
 start = Sys.time()
-estOrder = scorelingam(X=X,mb=mbhat,numUpdates=10,family='laplace')
+estOrder = scorelingam(X=X,mb=mbhat,numUpdates=5,family='laplace')
 end = Sys.time()
 difftime(end,start,units='mins')
 ```
 
-## Check accuracy of estimated ordering:
-
+## Check accuracy of estimated ordering
+Calculate the proportion of parents sorted after child (lower is better).
 ```{r,cache=F}
-# check sorting errors (ideally close to zero)
-# proportion of parents sorted after child
 checkSortingErrors(estOrder=estOrder,A=lingamParams$B)
 ```
+
 
