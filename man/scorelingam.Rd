@@ -18,7 +18,7 @@ scorelingam(X, mb, numUpdates = 5L, family = "laplace", df = 10)
 \item{df}{Degrees of freedom for scaled-t-distributed noise. Default: df=10.}
 }
 \value{
-A length p vector with the estimated permutation.
+A length p vector with the specified topological ordering of the nodes in the underlying DAG. Its unique elements correspond to the indices 1,2,...,p.
 }
 \description{
 The ScoreLiNGAM sorting procedure.

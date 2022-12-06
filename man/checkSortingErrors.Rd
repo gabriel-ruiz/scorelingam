@@ -7,10 +7,12 @@
 checkSortingErrors(estOrder, A)
 }
 \arguments{
-\item{A:}{The true weighted adjacency matrix.}
+\item{estOrder:}{A length p vector with the estimated topological ordering. Its unique elements correspond to the indices 1,2,...,p.}
+
+\item{A:}{The true DAG adjacency matrix.}
 }
 \value{
-Returns proportion of ancestors sorted after descendants if argument M is a DAG adjancency matrix, then returns proportion of parents sorted after children.
+Returns proportion of parents sorted after children. See Equation (11) in the paper, which defines the output of this function: \eqn{{\rm ERR}(\hat{\pi})}.
 }
 \description{
 Sorting Error.

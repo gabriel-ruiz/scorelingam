@@ -9,7 +9,7 @@ getParents(mb, ordering)
 \arguments{
 \item{mb}{A length p list object whose j-th entry gives the Markov blanket of node j. The j-th entry can also be some other set that defines the possible support for the parent set.}
 
-\item{ordering}{A length p vector which gives the specified topological ordering of the nodes in the underlying DAG.}
+\item{ordering:}{A length p vector with the specified topological ordering of the nodes in the underlying DAG. Its unique elements correspond to the indices 1,2,...,p.}
 }
 \value{
 A list object of length p; entry j denotes the parent set of node j in the underlying DAG.

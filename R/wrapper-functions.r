@@ -7,7 +7,7 @@
 #' @param numUpdates The number of updates to give while sorting. Default: numUpdates=5.
 #' @param family Currently allows 't', 'laplace' (default), or 'logistic'.
 #' @param df Degrees of freedom for scaled-t-distributed noise. Default: df=10.
-#' @return A length p vector with the estimated permutation.
+#' @return A length p vector with the specified topological ordering of the nodes in the underlying DAG. Its unique elements correspond to the indices 1,2,...,p. 
 #' @export
 scorelingam <- function(X, mb, numUpdates = 5L, family = "laplace", df = 10) {
   scorelingam_( X, mb, numUpdates, family, df)
@@ -155,8 +155,9 @@ dlap <- function(x,center=mean(x),shape=mean(abs(x-center)),log=F){
 
 
 #' Sorting Error. 
-#' @param A: The true weighted adjacency matrix. 
-#' @return Returns proportion of ancestors sorted after descendants if argument M is a DAG adjancency matrix, then returns proportion of parents sorted after children.
+#' @param estOrder: A length p vector with the estimated topological ordering. Its unique elements correspond to the indices 1,2,...,p. 
+#' @param A: The true DAG adjacency matrix. 
+#' @return Returns proportion of parents sorted after children. See Equation (11) in the paper, which defines the output of this function: \eqn{{\rm ERR}(\hat{\pi})}.
 #' @export
 checkSortingErrors <- function(estOrder,A){
   M <- A
@@ -230,7 +231,7 @@ skeleton <- function(mb){
 
 #' Get parent sets given Markov blanket and topological ordering
 #' @param mb A length p list object whose j-th entry gives the Markov blanket of node j. The j-th entry can also be some other set that defines the possible support for the parent set.
-#' @param ordering A length p vector which gives the specified topological ordering of the nodes in the underlying DAG.
+#' @param ordering: A length p vector with the specified topological ordering of the nodes in the underlying DAG. Its unique elements correspond to the indices 1,2,...,p. 
 #' @return A list object of length p; entry j denotes the parent set of node j in the underlying DAG.
 #' @export
 getParents <- function(mb,ordering){
