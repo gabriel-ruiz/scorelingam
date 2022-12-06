@@ -6,7 +6,7 @@ Date: 2022-12-04
 Author: Gabriel Ruiz 
 Maintainer: Gabriel Ruiz 
 Description: Implements the sorting procedure outlined in Ruiz et. al (2022+).
-URL: https://github.com/gabriel-ruiz/scorelingam, https://openreview.net/forum?id=4pCjIGIjrt
+URL: https://gabriel-ruiz.github.io/scorelingam/, https://openreview.net/forum?id=4pCjIGIjrt
 BugReports: https://github.com/gabriel-ruiz/scorelingam/issues
 Imports: Rcpp (>= 1.0.9)
 LinkingTo: Rcpp, RcppArmadillo
