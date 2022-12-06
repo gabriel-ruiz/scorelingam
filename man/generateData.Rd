@@ -2,7 +2,7 @@
 % Please edit documentation in R/wrapper-functions.r
 \name{generateData}
 \alias{generateData}
-\title{Generate Linear (laplace, logistic, or scaled-t error family) Structural Causal Model Data}
+\title{Generate Linear (laplace, logistic, or scaled-t error family) Structural Equation Model Data}
 \usage{
 generateData(
   B,
@@ -20,13 +20,11 @@ generateData(
 
 \item{family}{Currently allow 't', 'laplace' (default), or 'logistic'.}
 
-\item{scale}{Length p vector s.t. \eqn{{\rm var}[\epsilon_j] = }scale[j]\eqn{\times {\rm var}[\epsilon_0]} with \eqn{\epsilon_0\sim {\rm family}(1) } (the chosen family with scale parameter 1). Default: scale=rep(1,ncol(B)).}
-
 \item{df}{Degrees of freedom for scaled-t-distributed noise. Default: df=5.}
 }
 \value{
 An n by p matrix object.
 }
 \description{
-Generate Linear (laplace, logistic, or scaled-t error family) Structural Causal Model Data
+Generate Linear (laplace, logistic, or scaled-t error family) Structural Equation Model Data
 }

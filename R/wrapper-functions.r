@@ -87,11 +87,11 @@ randomWeightedAdjacencyMatrix <- function( p,num.roots=p-1, pa.min=1, pa.max=1,p
 
 
 
-#' Generate Linear (laplace, logistic, or scaled-t error family) Structural Causal Model Data
+#' Generate Linear (laplace, logistic, or scaled-t error family) Structural Equation Model Data
 #' @param B A p by p weighted adjacency matrix for an acyclic linear SEM. 
 #' @param n The desired sample size. Default: n=1000.
 #' @param family Currently allow 't', 'laplace' (default), or 'logistic'.
-#' @param scale Length p vector s.t. \eqn{{\rm var}[\epsilon_j] = }scale[j]\eqn{\times {\rm var}[\epsilon_0]} with \eqn{\epsilon_0\sim {\rm family}(1) } (the chosen family with scale parameter 1). Default: scale=rep(1,ncol(B)).
+#' @param scale Length p vector s.t. \eqn{{\rm var}[\epsilon_j] = \left({\rm scale[j]}\right)^2\eqn{\times {\rm var}[\epsilon_0]} with \eqn{\epsilon_0\sim {\rm family}(1) } (the chosen family with scale parameter 1). Default: scale=rep(1,ncol(B)).
 #' @param df Degrees of freedom for scaled-t-distributed noise. Default: df=5.
 #' @return An n by p matrix object.
 #' @export
