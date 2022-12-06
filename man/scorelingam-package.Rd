@@ -9,7 +9,7 @@
   Implements the sorting procedure outlined in \href{https://openreview.net/forum?id=4pCjIGIjrt}{Ruiz et. al (2022+)}. 
 }
 \details{
-  The main procedure is `scorelingam`. See its documentation below for more info. See the examples at https://github.com/gabriel-ruiz/scorelingam.
+  The main procedure is \code{\link{scorelingam}}. See its documentation below for more info.
 }
 \author{
 Gabriel Ruiz
@@ -24,4 +24,8 @@ G Ruiz, OH Madrid-Padilla, Q Zhou. "Sequentially learning the topological orderi
 
 \examples{
  See the examples at https://github.com/gabriel-ruiz/scorelingam.
+}
+
+\seealso{
+\code{\link{scorelingam}}
 }

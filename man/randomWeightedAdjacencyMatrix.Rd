@@ -19,24 +19,24 @@ randomWeightedAdjacencyMatrix(
 )
 }
 \arguments{
-\item{p}{number of nodes in underlying DAG.}
+\item{p}{Number of nodes in underlying DAG.}
 
-\item{num.roots}{number of root nodes in underlying DAG. Default: num.roots=p-1.}
+\item{num.roots}{Number of root nodes in underlying DAG. Default: num.roots=p-1.}
 
-\item{pa.min}{minimum number of parents a node can have. Default: pa.min=1.}
+\item{pa.min}{Minimum number of parents a node can have. Default: pa.min=1.}
 
-\item{pa.max}{maximum number of parents a node can have. Default: pa.max=1.}
+\item{pa.max}{Maximum number of parents a node can have. Default: pa.max=1.}
 
-\item{pa.wt.min}{the minimum (in absolute value) coefficient value for the parent to a child in the linear SEM. Default: pa.wt.min=1.}
+\item{pa.wt.min}{The minimum (in absolute value) coefficient value for the parent to a child in the linear SEM. Default: pa.wt.min=1.}
 
-\item{pa.wt.max}{the maximum (in absolute value) coefficient value for the parent to a child in the linear SEM. Default: pa.wt.max=1.}
+\item{pa.wt.max}{The maximum (in absolute value) coefficient value for the parent to a child in the linear SEM. Default: pa.wt.max=1.}
 
-\item{prob.pos}{the probability of a positive coefficient value for the parent to a child in the the linear SEM. Default: prob.pos=0.5.}
+\item{prob.pos}{The probability of a positive coefficient value for the parent to a child in the the linear SEM. Default: prob.pos=0.5.}
 
-\item{perm}{a topological ordering for underlying DAG. Default is random.}
+\item{perm}{A topological ordering for underlying DAG. Default is random.}
 }
 \value{
-a list with two elements: perm (the topological ordering used) and B (the weighted adjacency matrix).
+A list with two elements: perm (the topological ordering used) and B (the weighted adjacency matrix).
 }
 \description{
 Generate a random weighted adjacency matrix with num.roots number of root nodes.

@@ -14,18 +14,18 @@ generateData(
 )
 }
 \arguments{
-\item{B}{a p by p weighted adjacency matrix for an acyclic linear SEM.}
+\item{B}{A p by p weighted adjacency matrix for an acyclic linear SEM.}
 
-\item{n}{the desired sample size. Default: n=1000.}
+\item{n}{The desired sample size. Default: n=1000.}
 
 \item{family}{Currently allow 't', 'laplace' (default), or 'logistic'.}
 
-\item{scale}{length p vector s.t. \eqn{{\rm var}[\epsilon_j] = }scale[j]\eqn{\times {\rm var}[\epsilon_0]} with \eqn{\epsilon_0\sim {\rm family}(1) } (the chosen family with scale parameter 1). Default: scale=rep(1,ncol(B)).}
+\item{scale}{Length p vector s.t. \eqn{{\rm var}[\epsilon_j] = }scale[j]\eqn{\times {\rm var}[\epsilon_0]} with \eqn{\epsilon_0\sim {\rm family}(1) } (the chosen family with scale parameter 1). Default: scale=rep(1,ncol(B)).}
 
-\item{df}{degrees of freedom for scaled-t-distributed noise. Default: df=5.}
+\item{df}{Degrees of freedom for scaled-t-distributed noise. Default: df=5.}
 }
 \value{
-n by p matrix object.
+An n by p matrix object.
 }
 \description{
 Generate Linear (laplace, logistic, or scaled-t error family) Structural Causal Model Data

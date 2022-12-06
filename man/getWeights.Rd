@@ -9,9 +9,9 @@ Estimation is done via Ordinary Least Squares (OLS) regression.}
 getWeights(X, pa)
 }
 \arguments{
-\item{X}{an n by p data matrix which is used to estimate the weighted adjacency matrix.}
+\item{X}{An n by p data matrix which is used to estimate the weighted adjacency matrix.}
 
-\item{pa}{a length p list object whose j-th entry gives the support for node j's parent set.}
+\item{pa}{A length p list object whose j-th entry gives the support for node j's parent set.}
 }
 \value{
 A p by p weighted adjacency matrix for the linear SEM.

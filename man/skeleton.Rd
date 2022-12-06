@@ -7,10 +7,10 @@
 skeleton(mb)
 }
 \arguments{
-\item{mb}{the Markov blanket or neighborhood estiamtes. A list of length p.}
+\item{mb}{The Markov blanket or neighborhood estiamtes. A list of length p.}
 }
 \value{
-a p by p adjacency matrix for an undirected graph. 0 indicates no undirected edge in the graph, while 1 indicates an directed edge in the graph.
+A p by p adjacency matrix for an undirected graph. 0 indicates no undirected edge in the graph, while 1 indicates an directed edge in the graph.
 }
 \description{
 Skeleton for an undirected graph based on Markov Blanket (or neighborhood estimates) of each node.

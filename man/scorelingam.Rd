@@ -7,15 +7,15 @@
 scorelingam(X, mb, numUpdates = 5L, family = "laplace", df = 10)
 }
 \arguments{
-\item{X}{an n by p data matrix which is used to estimate the permutation.}
+\item{X}{An n by p data matrix which is used to estimate the permutation.}
 
-\item{mb}{a length p list object whose j-th entry gives the Markov blanket of node j (or its superset).}
+\item{mb}{A length p list object whose j-th entry gives the Markov blanket of node j (or its superset).}
 
-\item{numUpdates}{the number of updates to give while sorting. Default: numUpdates=5.}
+\item{numUpdates}{The number of updates to give while sorting. Default: numUpdates=5.}
 
 \item{family}{Currently allows 't', 'laplace' (default), or 'logistic'.}
 
-\item{df}{degrees of freedom for scaled-t-distributed noise. Default: df=10.}
+\item{df}{Degrees of freedom for scaled-t-distributed noise. Default: df=10.}
 }
 \value{
 A length p vector with the estimated permutation.
